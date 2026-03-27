@@ -1,0 +1,128 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import TechniqueCard from "../components/TechniqueCard.astro";
+import { techniques } from "../data/techniques";
+
+const gradients = [
+  "bg-gradient-to-br from-sage-400 to-sage-600",
+  "bg-gradient-to-br from-lavender-400 to-lavender-600",
+  "bg-gradient-to-br from-warm-400 to-warm-600",
+  "bg-gradient-to-br from-blue-400 to-indigo-500",
+  "bg-gradient-to-br from-rose-400 to-pink-600",
+];
+---
+
+<Layout title="CalmWall — Free Anxiety Relief Techniques + Premium Phone Wallpapers">
+  <Header />
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-sage-100 via-lavender-50 to-warm-50"></div>
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-sage-900 leading-tight mb-6">
+        Your anxiety toolkit.
+        <br />
+        <span class="text-sage-500">On your lock screen.</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-sage-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Learn evidence-based techniques to manage anxiety — completely free.
+        Then get beautiful wallpapers that remind you to practice every day.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="#techniques"
+          class="bg-sage-800 hover:bg-sage-700 text-white font-semibold px-8 py-3.5 rounded-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+        >
+          Explore Techniques
+        </a>
+        <a
+          href="#how-it-works"
+          class="bg-white hover:bg-sage-50 text-sage-800 font-semibold px-8 py-3.5 rounded-full border border-sage-200 transition-all duration-200"
+        >
+          How It Works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Techniques Grid -->
+  <section id="techniques" class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-4">5 Proven Techniques</h2>
+      <p class="text-sage-600 max-w-xl mx-auto">
+        Each method is backed by psychology research and takes less than 5 minutes. Learn for free, carry the reminder on your phone.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {techniques.map((technique, i) => (
+        <TechniqueCard
+          slug={technique.slug}
+          emoji={technique.emoji}
+          title={technique.title}
+          subtitle={technique.subtitle}
+          gradient={gradients[i % gradients.length]}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="bg-white border-y border-sage-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-4">How It Works</h2>
+        <p class="text-sage-600">Three simple steps to a calmer day.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-sage-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
+            📖
+          </div>
+          <h3 class="font-bold text-sage-900 text-lg mb-2">1. Learn</h3>
+          <p class="text-sage-600 text-sm leading-relaxed">
+            Read about each technique — what it is, when to use it, and step-by-step instructions. All content is free.
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-lavender-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
+            🧘
+          </div>
+          <h3 class="font-bold text-sage-900 text-lg mb-2">2. Practice</h3>
+          <p class="text-sage-600 text-sm leading-relaxed">
+            Try the techniques in your daily life. Most take less than 5 minutes and work anywhere.
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-warm-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
+            📱
+          </div>
+          <h3 class="font-bold text-sage-900 text-lg mb-2">3. Carry It</h3>
+          <p class="text-sage-600 text-sm leading-relaxed">
+            Get a beautiful phone wallpaper for each technique. Every time you unlock your phone, you're reminded to stay calm.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-4">Ready to start?</h2>
+    <p class="text-sage-600 max-w-lg mx-auto mb-8">
+      The techniques are free. The wallpapers are beautiful. Your calm is worth it.
+    </p>
+    <a
+      href="#techniques"
+      class="inline-flex items-center gap-2 bg-sage-800 hover:bg-sage-700 text-white font-semibold px-8 py-3.5 rounded-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+    >
+      Explore Techniques
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </a>
+  </section>
+
+  <Footer />
+</Layout>

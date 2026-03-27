@@ -1,0 +1,122 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import WallpaperPreview from "../../components/WallpaperPreview.astro";
+import { getTechnique, techniques } from "../../data/techniques";
+
+export function getStaticPaths() {
+  return techniques.map((t) => ({
+    params: { slug: t.slug },
+    props: { technique: t },
+  }));
+}
+
+const { technique } = Astro.props;
+const otherTechniques = techniques.filter((t) => t.slug !== technique.slug);
+
+const pageTitle = `${technique.title} — CalmWall`;
+const pageDescription = technique.description;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <!-- Back link -->
+    <a href="/" class="inline-flex items-center gap-1 text-sage-500 hover:text-sage-700 text-sm mb-8 transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to all techniques
+    </a>
+
+    <!-- Hero -->
+    <div class="text-center mb-12">
+      <span class="text-5xl block mb-4">{technique.emoji}</span>
+      <h1 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-3">{technique.title}</h1>
+      <p class="text-sage-600 text-lg italic font-serif">"{technique.hero}"</p>
+    </div>
+
+    <!-- What Is It -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-sage-900 mb-4 flex items-center gap-2">
+        <span class="w-8 h-8 bg-sage-100 rounded-lg flex items-center justify-center text-sm">💡</span>
+        What Is It?
+      </h2>
+      <p class="text-sage-700 leading-relaxed text-lg">{technique.whatIsIt}</p>
+      <p class="text-sage-500 text-sm mt-2">Source: {technique.source}</p>
+    </section>
+
+    <!-- When to Use -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-sage-900 mb-4 flex items-center gap-2">
+        <span class="w-8 h-8 bg-lavender-100 rounded-lg flex items-center justify-center text-sm">⏰</span>
+        When to Use It
+      </h2>
+      <ul class="space-y-3">
+        {technique.whenToUse.map((item) => (
+          <li class="flex items-start gap-3 text-sage-700">
+            <span class="text-lavender-500 mt-0.5 flex-shrink-0">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- How to Do It -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-sage-900 mb-4 flex items-center gap-2">
+        <span class="w-8 h-8 bg-warm-100 rounded-lg flex items-center justify-center text-sm">✋</span>
+        How to Do It
+      </h2>
+      <ol class="space-y-6">
+        {technique.howToDoIt.map((step) => (
+          <li class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 bg-sage-800 text-white rounded-xl flex items-center justify-center font-bold text-lg">
+              {step.step}
+            </span>
+            <div>
+              <h3 class="font-semibold text-sage-900 text-lg mb-1">{step.title}</h3>
+              <p class="text-sage-600 leading-relaxed">{step.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- Wallpaper Preview -->
+    <section class="border-t border-sage-200 pt-12 mb-12">
+      <h2 class="text-2xl font-bold text-sage-900 mb-2 text-center">Carry This With You</h2>
+      <p class="text-sage-500 text-center mb-8">
+        A beautiful phone wallpaper with a daily reminder to practice this technique.
+      </p>
+      <WallpaperPreview quote={technique.wallpaperQuote} />
+    </section>
+
+    <!-- Other Techniques -->
+    <section class="border-t border-sage-200 pt-12">
+      <h2 class="text-2xl font-bold text-sage-900 mb-6">Other Techniques</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {otherTechniques.map((t) => (
+          <a
+            href={`/${t.slug}`}
+            class="flex items-center gap-3 p-4 bg-white rounded-xl border border-sage-200 hover:border-sage-400 hover:shadow-sm transition-all duration-200"
+          >
+            <span class="text-2xl">{t.emoji}</span>
+            <div>
+              <h3 class="font-semibold text-sage-900">{t.title}</h3>
+              <p class="text-sage-500 text-sm">{t.subtitle}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+
+  <Footer />
+</Layout>

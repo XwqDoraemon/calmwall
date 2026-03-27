@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sage-50: #f6f7f4;
+  --color-sage-100: #e8ebe3;
+  --color-sage-200: #d1d7c7;
+  --color-sage-300: #b0bba1;
+  --color-sage-400: #8d9b7d;
+  --color-sage-500: #6f8160;
+  --color-sage-600: #58684d;
+  --color-sage-700: #45523e;
+  --color-sage-800: #394335;
+  --color-sage-900: #303a2e;
+
+  --color-lavender-50: #f5f3ff;
+  --color-lavender-100: #ede9fe;
+  --color-lavender-200: #ddd6fe;
+  --color-lavender-300: #c4b5fd;
+  --color-lavender-400: #a78bfa;
+  --color-lavender-500: #8b5cf6;
+  --color-lavender-600: #7c3aed;
+  --color-lavender-700: #6d28d9;
+  --color-lavender-800: #5b21b6;
+  --color-lavender-900: #4c1d95;
+
+  --color-warm-50: #fdf8f0;
+  --color-warm-100: #faecd8;
+  --color-warm-200: #f5d5ae;
+  --color-warm-300: #efb97e;
+  --color-warm-400: #e89c4e;
+  --color-warm-500: #e28226;
+  --color-warm-600: #d06b18;
+  --color-warm-700: #ad5515;
+  --color-warm-800: #8c4417;
+  --color-warm-900: #723915;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Wallpaper blur preview */
+.wallpaper-preview {
+  filter: blur(8px) brightness(0.9);
+  transition: filter 0.3s ease;
+}
+
+.wallpaper-preview:hover {
+  filter: blur(4px) brightness(1);
+}
