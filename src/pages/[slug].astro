@@ -1,9 +1,9 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import WallpaperPreview from "../../components/WallpaperPreview.astro";
-import { getTechnique, techniques } from "../../data/techniques";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WallpaperPreview from "../components/WallpaperPreview.astro";
+import { getTechnique, techniques } from "../data/techniques";
 
 export function getStaticPaths() {
   return techniques.map((t) => ({
