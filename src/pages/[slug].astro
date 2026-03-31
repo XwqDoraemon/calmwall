@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WallpaperPreview from "../components/WallpaperPreview.astro";
-import { getTechnique, techniques } from "../data/techniques";
+import { getTechnique, techniques, categoryMeta } from "../data/techniques";
 
 export function getStaticPaths() {
   return techniques.map((t) => ({
@@ -13,9 +13,14 @@ export function getStaticPaths() {
 }
 
 const { technique } = Astro.props;
-const otherTechniques = techniques.filter((t) => t.slug !== technique.slug);
+const cat = technique.category
+  ? categoryMeta[technique.category as keyof typeof categoryMeta]
+  : null;
+const relatedTechniques = techniques
+  .filter((t) => t.slug !== technique.slug && t.category === technique.category)
+  .slice(0, 4);
 
-const pageTitle = `${technique.title} — CalmWall`;
+const pageTitle = `${technique.title} — VibeBalm`;
 const pageDescription = technique.description;
 ---
 
@@ -24,12 +29,21 @@ const pageDescription = technique.description;
 
   <article class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
     <!-- Back link -->
-    <a href="/" class="inline-flex items-center gap-1 text-sage-500 hover:text-sage-700 text-sm mb-8 transition-colors">
+    <a href="/" class="inline-flex items-center gap-1 text-sage-500 hover:text-sage-700 text-sm mb-4 transition-colors">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
-      Back to all techniques
+      All Techniques
     </a>
+
+    <!-- Category badge -->
+    {cat && (
+      <div class="mb-6">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-sage-100 text-sage-700 border border-sage-200">
+          {cat.emoji} {cat.label}
+        </span>
+      </div>
+    )}
 
     <!-- Hero -->
     <div class="text-center mb-12">
@@ -95,27 +109,36 @@ const pageDescription = technique.description;
       <p class="text-sage-500 text-center mb-8">
         A beautiful phone wallpaper with a daily reminder to practice this technique.
       </p>
-      <WallpaperPreview quote={technique.wallpaperQuote} />
+      <WallpaperPreview quote={technique.wallpaperQuote} slug={technique.slug} />
     </section>
 
-    <!-- Other Techniques -->
-    <section class="border-t border-sage-200 pt-12">
-      <h2 class="text-2xl font-bold text-sage-900 mb-6">Other Techniques</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {otherTechniques.map((t) => (
-          <a
-            href={`/${t.slug}`}
-            class="flex items-center gap-3 p-4 bg-white rounded-xl border border-sage-200 hover:border-sage-400 hover:shadow-sm transition-all duration-200"
-          >
-            <span class="text-2xl">{t.emoji}</span>
-            <div>
-              <h3 class="font-semibold text-sage-900">{t.title}</h3>
-              <p class="text-sage-500 text-sm">{t.subtitle}</p>
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
+    <!-- Related Techniques (same category) -->
+    {relatedTechniques.length > 0 && (
+      <section class="border-t border-sage-200 pt-12">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-sage-900">Related Techniques</h2>
+          {cat && (
+            <a href="/#techniques" class="text-sm font-medium text-sage-500 hover:text-sage-700 transition-colors">
+              View all in {cat.label} →
+            </a>
+          )}
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {relatedTechniques.map((t) => (
+            <a
+              href={`/${t.slug}`}
+              class="flex items-center gap-3 p-4 bg-white rounded-xl border border-sage-200 hover:border-sage-400 hover:shadow-sm transition-all duration-200"
+            >
+              <span class="text-2xl">{t.emoji}</span>
+              <div>
+                <h3 class="font-semibold text-sage-900">{t.title}</h3>
+                <p class="text-sage-500 text-sm">{t.subtitle}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
   </article>
 
   <Footer />

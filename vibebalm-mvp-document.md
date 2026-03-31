@@ -1,4 +1,4 @@
-# CalmWall — MVP Product Document
+# VibeBalm — MVP Product Document
 
 > Free anxiety-relief techniques + premium phone wallpapers. No login required. Built for the global market.
 
@@ -10,7 +10,7 @@
 Help people manage anxiety and emotional stress through simple, evidence-based psychological techniques — wrapped in beautiful phone wallpapers they see every day.
 
 ### Name
-**CalmWall** (working title, domain TBD)
+**VibeBalm** (working title, domain TBD)
 
 ### Target Audience
 - English-speaking users aged 18–35
@@ -201,7 +201,7 @@ User clicks "Get This Wallpaper" on site
 
 ### Project Structure
 ```
-calmwall/
+vibebalm/
 ├── public/
 │   ├── wallpapers/       # Blurred preview images (small, webp)
 │   └── favicon.svg
@@ -227,8 +227,8 @@ calmwall/
 ### Deployment
 ```bash
 # One-time setup
-npm create astro@latest calmwall
-cd calmwall
+npm create astro@latest vibebalm
+cd vibebalm
 npx astro add tailwind cloudflare
 
 # Deploy

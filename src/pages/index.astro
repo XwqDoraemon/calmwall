@@ -2,19 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { techniques, categoryMeta } from "../data/techniques";
 import TechniqueCard from "../components/TechniqueCard.astro";
-import { techniques } from "../data/techniques";
 
-const gradients = [
-  "bg-gradient-to-br from-sage-400 to-sage-600",
-  "bg-gradient-to-br from-lavender-400 to-lavender-600",
-  "bg-gradient-to-br from-warm-400 to-warm-600",
-  "bg-gradient-to-br from-blue-400 to-indigo-500",
-  "bg-gradient-to-br from-rose-400 to-pink-600",
-];
+const categories = Object.entries(categoryMeta);
 ---
 
-<Layout title="CalmWall — Free Anxiety Relief Techniques + Premium Phone Wallpapers">
+<Layout title="VibeBalm — Free Anxiety Relief Techniques + Premium Phone Wallpapers">
   <Header />
 
   <!-- Hero Section -->
@@ -38,33 +32,56 @@ const gradients = [
           Explore Techniques
         </a>
         <a
-          href="#how-it-works"
+          href="/wallpapers"
           class="bg-white hover:bg-sage-50 text-sage-800 font-semibold px-8 py-3.5 rounded-full border border-sage-200 transition-all duration-200"
         >
-          How It Works
+          Browse Wallpapers
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Techniques Grid -->
-  <section id="techniques" class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-4">5 Proven Techniques</h2>
-      <p class="text-sage-600 max-w-xl mx-auto">
-        Each method is backed by psychology research and takes less than 5 minutes. Learn for free, carry the reminder on your phone.
-      </p>
+  <!-- Techniques Section -->
+  <section id="techniques" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+    <!-- Category Tabs -->
+    <div class="mb-12 overflow-x-auto">
+      <div class="flex gap-3 min-w-max pb-2 justify-center" id="category-tabs">
+        {categories.map(([key, cat]) => (
+          <button
+            data-category={key}
+            class={`category-tab flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold border-2 transition-all duration-200 ${
+              key === "all"
+                ? "bg-sage-800 border-sage-800 text-white shadow-md"
+                : "bg-white border-sage-200 text-sage-600 hover:border-sage-400 hover:text-sage-900 hover:shadow-sm"
+            }`}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {techniques.map((technique, i) => (
-        <TechniqueCard
-          slug={technique.slug}
-          emoji={technique.emoji}
-          title={technique.title}
-          subtitle={technique.subtitle}
-          gradient={gradients[i % gradients.length]}
-        />
+
+    <!-- Technique Cards Grid -->
+    <div id="technique-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 grid-rows-[auto]">
+      {techniques.map((technique) => (
+        <div
+          data-card-category={technique.category}
+          class="technique-card"
+        >
+          <TechniqueCard
+            slug={technique.slug}
+            emoji={technique.emoji}
+            title={technique.title}
+            subtitle={technique.subtitle}
+          />
+        </div>
       ))}
+    </div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden text-center py-16">
+      <span class="text-5xl block mb-4">🤔</span>
+      <p class="text-sage-500 text-lg">No techniques in this category yet.</p>
     </div>
   </section>
 
@@ -77,31 +94,19 @@ const gradients = [
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="text-center">
-          <div class="w-16 h-16 bg-sage-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
-            📖
-          </div>
+          <div class="w-16 h-16 bg-sage-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">📖</div>
           <h3 class="font-bold text-sage-900 text-lg mb-2">1. Learn</h3>
-          <p class="text-sage-600 text-sm leading-relaxed">
-            Read about each technique — what it is, when to use it, and step-by-step instructions. All content is free.
-          </p>
+          <p class="text-sage-600 text-sm leading-relaxed">Read about each technique — what it is, when to use it, and step-by-step instructions. All content is free.</p>
         </div>
         <div class="text-center">
-          <div class="w-16 h-16 bg-lavender-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
-            🧘
-          </div>
+          <div class="w-16 h-16 bg-lavender-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🧘</div>
           <h3 class="font-bold text-sage-900 text-lg mb-2">2. Practice</h3>
-          <p class="text-sage-600 text-sm leading-relaxed">
-            Try the techniques in your daily life. Most take less than 5 minutes and work anywhere.
-          </p>
+          <p class="text-sage-600 text-sm leading-relaxed">Try the techniques in your daily life. Most take less than 5 minutes and work anywhere.</p>
         </div>
         <div class="text-center">
-          <div class="w-16 h-16 bg-warm-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
-            📱
-          </div>
+          <div class="w-16 h-16 bg-warm-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">📱</div>
           <h3 class="font-bold text-sage-900 text-lg mb-2">3. Carry It</h3>
-          <p class="text-sage-600 text-sm leading-relaxed">
-            Get a beautiful phone wallpaper for each technique. Every time you unlock your phone, you're reminded to stay calm.
-          </p>
+          <p class="text-sage-600 text-sm leading-relaxed">Get a beautiful phone wallpaper for each technique. Every time you unlock your phone, you're reminded to stay calm.</p>
         </div>
       </div>
     </div>
@@ -110,9 +115,7 @@ const gradients = [
   <!-- CTA -->
   <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 text-center">
     <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-4">Ready to start?</h2>
-    <p class="text-sage-600 max-w-lg mx-auto mb-8">
-      The techniques are free. The wallpapers are beautiful. Your calm is worth it.
-    </p>
+    <p class="text-sage-600 max-w-lg mx-auto mb-8">The techniques are free. The wallpapers are beautiful. Your calm is worth it.</p>
     <a
       href="#techniques"
       class="inline-flex items-center gap-2 bg-sage-800 hover:bg-sage-700 text-white font-semibold px-8 py-3.5 rounded-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
@@ -126,3 +129,29 @@ const gradients = [
 
   <Footer />
 </Layout>
+
+<script>
+  document.querySelectorAll('.category-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const category = tab.getAttribute('data-category');
+      document.querySelectorAll('.category-tab').forEach(t => {
+        t.classList.remove('bg-sage-800', 'border-sage-800', 'text-white', 'shadow-md');
+        t.classList.add('bg-white', 'border-sage-200', 'text-sage-600');
+      });
+      tab.classList.remove('bg-white', 'border-sage-200', 'text-sage-600');
+      tab.classList.add('bg-sage-800', 'border-sage-800', 'text-white', 'shadow-md');
+      const cards = document.querySelectorAll('.technique-card');
+      let visibleCount = 0;
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-card-category') === category) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      const emptyState = document.getElementById('empty-state');
+      if (emptyState) emptyState.classList.toggle('hidden', visibleCount > 0);
+    });
+  });
+</script>

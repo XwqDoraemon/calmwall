@@ -1,0 +1,208 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { techniques } from "../data/techniques";
+---
+
+<Layout title="About — VibeBalm">
+  <Header />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+    <!-- Intro -->
+    <p class="text-sage-600 text-lg mb-12 leading-relaxed">
+      VibeBalm is a free collection of evidence-based mental health techniques — designed to help you manage anxiety, overcome procrastination, and build lasting psychological resilience.
+    </p>
+
+    <!-- Creator -->
+    <div class="mb-16">
+      <h2 class="text-3xl font-bold text-sage-900 mb-6">Hi, we're VibeBalm 👋</h2>
+      <div class="text-sage-700 text-lg leading-relaxed space-y-4">
+        <p>
+          Anxiety, procrastination, burnout, perfectionism, self-criticism — these aren't character flaws. They're patterns. And like all patterns, they can be understood, interrupted, and rewired.
+        </p>
+        <p>
+          We built VibeBalm because we noticed something: the internet is full of mental health advice, but very little of it is <em>actionable</em>. Most articles tell you to "be mindful" or "just start." But they don't tell you <strong>how</strong> — step by step, in the moment, when your brain is fighting against you.
+        </p>
+        <p>
+          So we went to the source. Every technique on VibeBalm is grounded in established psychological frameworks — CBT, DBT, ACT, MBSR — and distilled into clear, 2-minute guides that you can use right now. No jargon. No sign-up. No paywall on the content.
+        </p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex flex-wrap gap-8 justify-center mb-16">
+      <div class="text-center">
+        <div class="text-4xl font-bold text-sage-900">{techniques.length}</div>
+        <div class="text-sm text-sage-500 mt-1">Techniques</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-sage-900">5</div>
+        <div class="text-sm text-sage-500 mt-1">Categories</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-sage-900">8</div>
+        <div class="text-sm text-sage-500 mt-1">Frameworks</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-sage-900">100%</div>
+        <div class="text-sm text-sage-500 mt-1">Free</div>
+      </div>
+    </div>
+
+    <!-- Mission -->
+    <div class="mb-16 bg-sage-50 rounded-2xl p-8 border border-sage-200">
+      <h2 class="text-2xl font-bold text-sage-900 mb-4">Our Mission</h2>
+      <div class="text-sage-700 leading-relaxed space-y-3">
+        <p>
+          <strong>Make mental health tools accessible, actionable, and stigma-free.</strong>
+        </p>
+        <p>
+          We believe everyone deserves access to techniques that actually work — not just vague wellness platitudes. You shouldn't need a therapist's referral to learn how to interrupt a panic attack or break a procrastination loop. These are human skills, and VibeBalm exists to democratize them.
+        </p>
+      </div>
+    </div>
+
+    <!-- What you'll find -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-sage-900 mb-6">What You'll Find Here</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-6 border border-sage-200">
+          <span class="text-2xl block mb-3">🧠</span>
+          <h3 class="font-bold text-sage-900 mb-2">18 Proven Techniques</h3>
+          <p class="text-sage-600 text-sm leading-relaxed">Each one sourced from clinical psychology, with clear step-by-step instructions and real-world applications.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-sage-200">
+          <span class="text-2xl block mb-3">📁</span>
+          <h3 class="font-bold text-sage-900 mb-2">5 Problem Categories</h3>
+          <p class="text-sage-600 text-sm leading-relaxed">Organized by the challenge you're facing — from chronic procrastination to acute anxiety — so you find the right tool fast.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-sage-200">
+          <span class="text-2xl block mb-3">📱</span>
+          <h3 class="font-bold text-sage-900 mb-2">Phone Wallpapers</h3>
+          <p class="text-sage-600 text-sm leading-relaxed">Beautiful reminders you carry on your lock screen. Every time you unlock your phone, a technique is there.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-sage-200">
+          <span class="text-2xl block mb-3">🆓</span>
+          <h3 class="font-bold text-sage-900 mb-2">100% Free Content</h3>
+          <p class="text-sage-600 text-sm leading-relaxed">Every technique guide is free forever. No sign-up required. No content paywall. Mental health should never be gated.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Important disclaimer -->
+    <div class="mb-16 bg-amber-50 rounded-2xl p-6 border border-amber-200">
+      <div class="flex items-start gap-3">
+        <span class="text-amber-600 text-xl mt-0.5">⚠️</span>
+        <div>
+          <h3 class="font-bold text-amber-900 mb-2">Important</h3>
+          <p class="text-amber-800 text-sm leading-relaxed">
+            VibeBalm is an educational resource, not a substitute for professional mental health care. If you are experiencing severe anxiety, depression, suicidal thoughts, or any mental health crisis, please reach out to a qualified professional or a crisis helpline. You are not alone, and help is available.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suggestion form -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-sage-900 mb-4">Suggestions & Feedback</h2>
+      <p class="text-sage-600 mb-6 leading-relaxed">
+        Have a technique you'd like us to add? Found an error? Want to share your experience? We'd love to hear from you.
+      </p>
+      <form id="suggestion-form" class="space-y-4">
+        <div>
+          <label for="s-name" class="block text-sm font-medium text-sage-700 mb-1">Your name <span class="text-sage-400">(optional)</span></label>
+          <input
+            type="text"
+            id="s-name"
+            maxlength="100"
+            placeholder="Anonymous is fine"
+            class="w-full px-4 py-3 rounded-xl border border-sage-200 bg-white text-sage-900 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:border-transparent transition"
+          />
+        </div>
+        <div>
+          <label for="s-type" class="block text-sm font-medium text-sage-700 mb-1">Type</label>
+          <select
+            id="s-type"
+            class="w-full px-4 py-3 rounded-xl border border-sage-200 bg-white text-sage-900 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:border-transparent transition"
+          >
+            <option value="">Select a category...</option>
+            <option value="new-technique">Suggest a new technique</option>
+            <option value="correction">Report an error</option>
+            <option value="experience">Share my experience</option>
+            <option value="feature">Feature request</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="s-msg" class="block text-sm font-medium text-sage-700 mb-1">Your message</label>
+          <textarea
+            id="s-msg"
+            rows="5"
+            maxlength="5000"
+            placeholder="Tell us what's on your mind..."
+            class="w-full px-4 py-3 rounded-xl border border-sage-200 bg-white text-sage-900 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:border-transparent transition resize-none"
+          ></textarea>
+        </div>
+        <div id="s-error" class="hidden text-rose-600 text-sm"></div>
+        <button
+          type="submit"
+          class="bg-sage-800 hover:bg-sage-700 text-white font-semibold px-8 py-3 rounded-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+        >
+          Send Suggestion
+        </button>
+      </form>
+      <div id="s-success" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
+        <p class="text-green-800 font-medium">✅ Thank you for your suggestion! We read every submission and will review it soon.</p>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="text-sage-500 text-sm leading-relaxed">
+      <p>
+        You can also reach us at <a href="mailto:hello@vibebalm.co" class="text-sage-700 hover:text-sage-900 underline underline-offset-2 transition-colors">hello@vibebalm.co</a> if you'd prefer email.
+      </p>
+    </div>
+  </article>
+
+  <Footer />
+</Layout>
+
+<script define:vars={{ storageKey: 'vibebalm_suggestions' }}>
+  // Load stored suggestions for display
+  const stored = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
+  const form = document.getElementById('suggestion-form');
+  const successMsg = document.getElementById('s-success');
+  const errorMsg = document.getElementById('s-error');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    errorMsg?.classList.add('hidden');
+
+    const name = document.getElementById('s-name')?.value?.trim() || 'Anonymous';
+    const type = document.getElementById('s-type')?.value || 'other';
+    const message = document.getElementById('s-msg')?.value?.trim();
+
+    if (!message) {
+      errorMsg.textContent = 'Please enter a message.';
+      errorMsg.classList.remove('hidden');
+      return;
+    }
+
+    // Save to localStorage
+    const suggestions = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    suggestions.push({
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      name,
+      type,
+      message,
+      timestamp: new Date().toISOString(),
+    });
+    localStorage.setItem(storageKey, JSON.stringify(suggestions));
+
+    // Show success
+    form.style.display = 'none';
+    successMsg?.classList.remove('hidden');
+  });
+</script>

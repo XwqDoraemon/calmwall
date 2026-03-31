@@ -1,10 +1,10 @@
 ---
 interface Props {
   quote: string;
-  gumroadLink?: string;
+  slug: string;
 }
 
-const { quote, gumroadLink = "#" } = Astro.props;
+const { quote, slug } = Astro.props;
 ---
 
 <div class="relative group">
@@ -15,17 +15,15 @@ const { quote, gumroadLink = "#" } = Astro.props;
         <p class="text-sage-700 font-serif text-xl sm:text-2xl leading-relaxed italic">
           "{quote}"
         </p>
-        <p class="text-sage-500 text-sm mt-4">CalmWall</p>
+        <p class="text-sage-500 text-sm mt-4">VibeBalm</p>
       </div>
     </div>
   </div>
 
-  <!-- CTA Overlay -->
+  <!-- CTA -->
   <div class="mt-6 text-center">
     <a
-      href={gumroadLink}
-      target="_blank"
-      rel="noopener"
+      href={`/buy/${slug}`}
       class="inline-flex items-center gap-2 bg-sage-800 hover:bg-sage-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,6 +31,6 @@ const { quote, gumroadLink = "#" } = Astro.props;
       </svg>
       Get This Wallpaper — $0.99
     </a>
-    <p class="text-sage-500 text-xs mt-2">Full collection (15 wallpapers) — $4.99</p>
+    <p class="text-sage-500 text-xs mt-2">Full collection (18 wallpapers) — $4.99</p>
   </div>
 </div>
