@@ -9,7 +9,7 @@ import TechniqueCard from "../components/TechniqueCard.astro";
 const categories = Object.entries(categoryMeta);
 ---
 
-<Layout title="VibeBalm — Free Anxiety Relief Techniques + Premium Phone Wallpapers">
+<Layout title="VibeBalm — Free Anxiety Relief Techniques">
   <Header />
 
   <!-- Hero Section -->
@@ -18,12 +18,9 @@ const categories = Object.entries(categoryMeta);
     <div class="relative max-w-5xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-sage-900 leading-tight mb-6">
         Your anxiety toolkit.
-        <br />
-        <span class="text-sage-500">On your lock screen.</span>
       </h1>
       <p class="text-lg sm:text-xl text-sage-600 max-w-2xl mx-auto mb-8 leading-relaxed">
         Learn evidence-based techniques to manage anxiety — completely free.
-        Then get beautiful wallpapers that remind you to practice every day.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
@@ -31,12 +28,6 @@ const categories = Object.entries(categoryMeta);
           class="bg-sage-800 hover:bg-sage-700 text-white font-semibold px-8 py-3.5 rounded-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
         >
           Explore Techniques
-        </a>
-        <a
-          href="/wallpapers"
-          class="bg-white hover:bg-sage-50 text-sage-800 font-semibold px-8 py-3.5 rounded-full border border-sage-200 transition-all duration-200"
-        >
-          Browse Wallpapers
         </a>
       </div>
     </div>
@@ -105,9 +96,9 @@ const categories = Object.entries(categoryMeta);
           <p class="text-sage-600 text-sm leading-relaxed">Try the techniques in your daily life. Most take less than 5 minutes and work anywhere.</p>
         </div>
         <div class="text-center">
-          <div class="w-16 h-16 bg-warm-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">📱</div>
-          <h3 class="font-bold text-sage-900 text-lg mb-2">3. Carry It</h3>
-          <p class="text-sage-600 text-sm leading-relaxed">Get a beautiful phone wallpaper for each technique. Every time you unlock your phone, you're reminded to stay calm.</p>
+          <div class="w-16 h-16 bg-warm-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">✨</div>
+          <h3 class="font-bold text-sage-900 text-lg mb-2">3. Transform</h3>
+          <p class="text-sage-600 text-sm leading-relaxed">Build lasting habits and resilience. These techniques work with consistent practice.</p>
         </div>
       </div>
     </div>
@@ -116,7 +107,7 @@ const categories = Object.entries(categoryMeta);
   <!-- CTA -->
   <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 text-center">
     <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-4">Ready to start?</h2>
-    <p class="text-sage-600 max-w-lg mx-auto mb-8">The techniques are free. The wallpapers are beautiful. Your calm is worth it.</p>
+    <p class="text-sage-600 max-w-lg mx-auto mb-8">Evidence-based techniques for anxiety relief. Completely free.</p>
     <a
       href="#techniques"
       class="inline-flex items-center gap-2 bg-sage-800 hover:bg-sage-700 text-white font-semibold px-8 py-3.5 rounded-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
@@ -130,9 +121,9 @@ const categories = Object.entries(categoryMeta);
 
   <!-- Suggestion CTA Section -->
   <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 text-center">
-    <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-4">有想法？告诉我们</h2>
+    <h2 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-4">Have feedback?</h2>
     <p class="text-sage-600 max-w-lg mx-auto mb-8">
-      你的建议让 VibeBalm 变得更好。无论是功能请求、bug 反馈，还是改进想法，我们都期待听到。
+      Help us improve VibeBalm. Share your thoughts, report bugs, or suggest features.
     </p>
     <button
       onclick="openSuggestionModal()"
@@ -141,7 +132,7 @@ const categories = Object.entries(categoryMeta);
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
       </svg>
-      发送建议
+      Send Suggestion
     </button>
   </section>
 

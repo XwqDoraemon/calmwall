@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import WallpaperPreview from "../components/WallpaperPreview.astro";
 import { getTechnique, techniques, categoryMeta } from "../data/techniques";
 
 export function getStaticPaths() {
@@ -47,7 +46,6 @@ const pageDescription = technique.description;
 
     <!-- Hero -->
     <div class="text-center mb-12">
-      <span class="text-5xl block mb-4">{technique.emoji}</span>
       <h1 class="text-3xl sm:text-4xl font-bold text-sage-900 mb-3">{technique.title}</h1>
       <p class="text-sage-600 text-lg italic font-serif">"{technique.hero}"</p>
     </div>
@@ -117,15 +115,6 @@ const pageDescription = technique.description;
         </div>
       </section>
     )}
-
-    <!-- Wallpaper Preview -->
-    <section class="border-t border-sage-200 pt-12 mb-12">
-      <h2 class="text-2xl font-bold text-sage-900 mb-2 text-center">Carry This With You</h2>
-      <p class="text-sage-500 text-center mb-8">
-        A beautiful phone wallpaper with a daily reminder to practice this technique.
-      </p>
-      <WallpaperPreview quote={technique.wallpaperQuote} slug={technique.slug} />
-    </section>
 
     <!-- Related Techniques (same category) -->
     {relatedTechniques.length > 0 && (
