@@ -103,106 +103,13 @@ import { techniques } from "../data/techniques";
       </div>
     </div>
 
-    <!-- Suggestion form -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-bold text-sage-900 mb-4">Suggestions & Feedback</h2>
-      <p class="text-sage-600 mb-6 leading-relaxed">
-        Have a technique you'd like us to add? Found an error? Want to share your experience? We'd love to hear from you.
-      </p>
-      <form id="suggestion-form" class="space-y-4">
-        <div>
-          <label for="s-name" class="block text-sm font-medium text-sage-700 mb-1">Your name <span class="text-sage-400">(optional)</span></label>
-          <input
-            type="text"
-            id="s-name"
-            maxlength="100"
-            placeholder="Anonymous is fine"
-            class="w-full px-4 py-3 rounded-xl border border-sage-200 bg-white text-sage-900 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:border-transparent transition"
-          />
-        </div>
-        <div>
-          <label for="s-type" class="block text-sm font-medium text-sage-700 mb-1">Type</label>
-          <select
-            id="s-type"
-            class="w-full px-4 py-3 rounded-xl border border-sage-200 bg-white text-sage-900 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:border-transparent transition"
-          >
-            <option value="">Select a category...</option>
-            <option value="new-technique">Suggest a new technique</option>
-            <option value="correction">Report an error</option>
-            <option value="experience">Share my experience</option>
-            <option value="feature">Feature request</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div>
-          <label for="s-msg" class="block text-sm font-medium text-sage-700 mb-1">Your message</label>
-          <textarea
-            id="s-msg"
-            rows="5"
-            maxlength="5000"
-            placeholder="Tell us what's on your mind..."
-            class="w-full px-4 py-3 rounded-xl border border-sage-200 bg-white text-sage-900 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400 focus:border-transparent transition resize-none"
-          ></textarea>
-        </div>
-        <div id="s-error" class="hidden text-rose-600 text-sm"></div>
-        <button
-          type="submit"
-          class="bg-sage-800 hover:bg-sage-700 text-white font-semibold px-8 py-3 rounded-full transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
-        >
-          Send Suggestion
-        </button>
-      </form>
-      <div id="s-success" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
-        <p class="text-green-800 font-medium">✅ Thank you for your suggestion! We read every submission and will review it soon.</p>
-      </div>
-    </div>
-
     <!-- Contact -->
     <div class="text-sage-500 text-sm leading-relaxed">
       <p>
-        You can also reach us at <a href="mailto:hello@vibebalm.co" class="text-sage-700 hover:text-sage-900 underline underline-offset-2 transition-colors">hello@vibebalm.co</a> if you'd prefer email.
+        Have questions or feedback? Reach out at <a href="mailto:hello@vibebalm.co" class="text-sage-700 hover:text-sage-900 underline underline-offset-2 transition-colors">hello@vibebalm.co</a>.
       </p>
     </div>
   </article>
 
   <Footer />
 </Layout>
-
-<script define:vars={{ storageKey: 'vibebalm_suggestions' }}>
-  // Load stored suggestions for display
-  const stored = JSON.parse(localStorage.getItem(storageKey) || '[]');
-
-  const form = document.getElementById('suggestion-form');
-  const successMsg = document.getElementById('s-success');
-  const errorMsg = document.getElementById('s-error');
-
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    errorMsg?.classList.add('hidden');
-
-    const name = document.getElementById('s-name')?.value?.trim() || 'Anonymous';
-    const type = document.getElementById('s-type')?.value || 'other';
-    const message = document.getElementById('s-msg')?.value?.trim();
-
-    if (!message) {
-      errorMsg.textContent = 'Please enter a message.';
-      errorMsg.classList.remove('hidden');
-      return;
-    }
-
-    // Save to localStorage
-    const suggestions = JSON.parse(localStorage.getItem(storageKey) || '[]');
-    suggestions.push({
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-      name,
-      type,
-      message,
-      timestamp: new Date().toISOString(),
-    });
-    localStorage.setItem(storageKey, JSON.stringify(suggestions));
-
-    // Show success
-    form.style.display = 'none';
-    successMsg?.classList.remove('hidden');
-  });
-</script>

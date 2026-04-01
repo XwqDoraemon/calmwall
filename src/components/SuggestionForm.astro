@@ -1,6 +1,6 @@
 ---
 /**
- * Calmwall 建议表单组件
+ * Calmwall Suggestion Form Component
  */
 const WORKER_URL = 'https://calmwall-suggestions.61c9459382ec1e163442f64689830298.workers.dev';
 ---
@@ -8,26 +8,26 @@ const WORKER_URL = 'https://calmwall-suggestions.61c9459382ec1e163442f6468983029
 <div id="suggestion-modal" class="suggestion-modal" role="dialog" aria-modal="true">
   <div class="modal-overlay" id="modal-overlay"></div>
   <div class="modal-content">
-    <button class="modal-close" id="modal-close" aria-label="关闭">&times;</button>
+    <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
     
-    <h2 class="modal-title">💬 发送建议</h2>
+    <h2 class="modal-title">💬 Send Suggestion</h2>
     
     <form id="suggestionForm" class="suggestion-form">
       <div class="form-group">
-        <label for="suggestion">建议内容 *</label>
+        <label for="suggestion">Your suggestion *</label>
         <textarea 
           id="suggestion" 
           name="suggestion" 
           required
           maxlength="2000"
-          placeholder="分享你的想法..."
+          placeholder="Share your thoughts..."
           rows="4"
         ></textarea>
         <span class="char-count">0/2000</span>
       </div>
 
       <div class="form-group">
-        <label for="email">联系邮箱（可选）</label>
+        <label for="email">Contact email (optional)</label>
         <input 
           type="email" 
           id="email" 
@@ -37,17 +37,17 @@ const WORKER_URL = 'https://calmwall-suggestions.61c9459382ec1e163442f6468983029
       </div>
 
       <div class="form-group">
-        <label for="type">建议类型</label>
+        <label for="type">Suggestion type</label>
         <select id="type" name="type">
-          <option value="general">💬 一般建议</option>
-          <option value="feature">✨ 功能建议</option>
-          <option value="bug">🐛 问题反馈</option>
-          <option value="improvement">💡 改进建议</option>
+          <option value="general">💬 General</option>
+          <option value="feature">✨ Feature request</option>
+          <option value="bug">🐛 Bug report</option>
+          <option value="improvement">💡 Improvement</option>
         </select>
       </div>
 
       <button type="submit" class="submit-btn" disabled>
-        发送建议
+        Send Suggestion
       </button>
 
       <div id="statusMessage" class="status-message"></div>
@@ -281,13 +281,13 @@ const WORKER_URL = 'https://calmwall-suggestions.61c9459382ec1e163442f6468983029
     };
 
     if (!formData.suggestion) {
-      showStatus('请输入建议内容', 'error');
+      showStatus('Please enter your suggestion', 'error');
       return;
     }
 
-    // 禁用表单
+    // Disable form
     submitBtn.disabled = true;
-    submitBtn.textContent = '发送中...';
+    submitBtn.textContent = 'Sending...';
     statusMsg.className = 'status-message';
     form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
 
@@ -301,12 +301,12 @@ const WORKER_URL = 'https://calmwall-suggestions.61c9459382ec1e163442f6468983029
       const result = await response.json();
 
       if (response.ok && result.success) {
-        showStatus('✅ 建议发送成功！感谢你的反馈', 'success');
+        showStatus('✅ Suggestion sent successfully! Thank you for your feedback', 'success');
         form.reset();
         charCount.textContent = '0/2000';
         submitBtn.disabled = true;
         
-        // 2秒后关闭模态框
+        // Close modal after 2 seconds
         setTimeout(() => {
           closeModal();
           setTimeout(() => {
@@ -314,15 +314,15 @@ const WORKER_URL = 'https://calmwall-suggestions.61c9459382ec1e163442f6468983029
           }, 300);
         }, 2000);
       } else {
-        showStatus(result.error || '发送失败，请稍后重试', 'error');
+        showStatus(result.error || 'Failed to send. Please try again later', 'error');
       }
     } catch (error) {
       console.error('Error:', error);
-      showStatus('网络错误，请检查连接后重试', 'error');
+      showStatus('Network error. Please check your connection and try again', 'error');
     } finally {
-      // 恢复表单
+      // Restore form
       submitBtn.disabled = false;
-      submitBtn.textContent = '发送建议';
+      submitBtn.textContent = 'Send Suggestion';
       form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
     }
   });
