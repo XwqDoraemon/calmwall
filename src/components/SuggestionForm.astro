@@ -226,8 +226,7 @@ const WORKER_URL = 'https://calmwall-suggestions.61c9459382ec1e163442f6468983029
   }
 </style>
 
-<script>
-  const WORKER_URL = '{WORKER_URL}';
+<script define:vars={{ WORKER_URL }}>
   const modal = document.getElementById('suggestion-modal');
   const overlay = document.getElementById('modal-overlay');
   const closeBtn = document.getElementById('modal-close');
