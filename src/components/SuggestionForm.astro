@@ -1,0 +1,335 @@
+---
+/**
+ * Calmwall 建议表单组件
+ */
+const WORKER_URL = 'https://calmwall-suggestions.61c9459382ec1e163442f64689830298.workers.dev';
+---
+
+<div id="suggestion-modal" class="suggestion-modal" role="dialog" aria-modal="true">
+  <div class="modal-overlay" id="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close" aria-label="关闭">&times;</button>
+    
+    <h2 class="modal-title">💬 发送建议</h2>
+    
+    <form id="suggestionForm" class="suggestion-form">
+      <div class="form-group">
+        <label for="suggestion">建议内容 *</label>
+        <textarea 
+          id="suggestion" 
+          name="suggestion" 
+          required
+          maxlength="2000"
+          placeholder="分享你的想法..."
+          rows="4"
+        ></textarea>
+        <span class="char-count">0/2000</span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">联系邮箱（可选）</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email"
+          placeholder="your@email.com"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="type">建议类型</label>
+        <select id="type" name="type">
+          <option value="general">💬 一般建议</option>
+          <option value="feature">✨ 功能建议</option>
+          <option value="bug">🐛 问题反馈</option>
+          <option value="improvement">💡 改进建议</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-btn" disabled>
+        发送建议
+      </button>
+
+      <div id="statusMessage" class="status-message"></div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .suggestion-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .suggestion-modal.active {
+    display: flex;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: modalSlideIn 0.3s ease-out;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover {
+    background: #e5e5e5;
+    color: #333;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+  }
+
+  textarea, input, select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+  }
+
+  textarea:focus, input:focus, select:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .char-count {
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    font-size: 0.75rem;
+    color: #999;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 0.875rem;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .submit-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  }
+
+  .submit-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .status-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    display: none;
+    font-size: 0.9rem;
+  }
+
+  .status-message.success {
+    display: block;
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+
+  .status-message.error {
+    display: block;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  @media (max-width: 640px) {
+    .modal-content {
+      padding: 1.5rem;
+      width: 95%;
+    }
+  }
+</style>
+
+<script>
+  const WORKER_URL = '{WORKER_URL}';
+  const modal = document.getElementById('suggestion-modal');
+  const overlay = document.getElementById('modal-overlay');
+  const closeBtn = document.getElementById('modal-close');
+  const form = document.getElementById('suggestionForm');
+  const submitBtn = form.querySelector('.submit-btn');
+  const statusMsg = document.getElementById('statusMessage');
+  const textarea = form.querySelector('textarea');
+  const charCount = form.querySelector('.char-count');
+
+  // 打开模态框
+  function openModal() {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    textarea.focus();
+  }
+
+  // 关闭模态框
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // 暴露到全局
+  window.openSuggestionModal = openModal;
+
+  // 事件监听
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+
+  // ESC 键关闭
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // 字符计数
+  textarea.addEventListener('input', () => {
+    const count = textarea.value.length;
+    charCount.textContent = `${count}/2000`;
+    submitBtn.disabled = count === 0;
+  });
+
+  // 表单提交
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = {
+      suggestion: form.suggestion.value.trim(),
+      email: form.email.value.trim(),
+      type: form.type.value
+    };
+
+    if (!formData.suggestion) {
+      showStatus('请输入建议内容', 'error');
+      return;
+    }
+
+    // 禁用表单
+    submitBtn.disabled = true;
+    submitBtn.textContent = '发送中...';
+    statusMsg.className = 'status-message';
+    form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
+
+    try {
+      const response = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        showStatus('✅ 建议发送成功！感谢你的反馈', 'success');
+        form.reset();
+        charCount.textContent = '0/2000';
+        submitBtn.disabled = true;
+        
+        // 2秒后关闭模态框
+        setTimeout(() => {
+          closeModal();
+          setTimeout(() => {
+            statusMsg.className = 'status-message';
+          }, 300);
+        }, 2000);
+      } else {
+        showStatus(result.error || '发送失败，请稍后重试', 'error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      showStatus('网络错误，请检查连接后重试', 'error');
+    } finally {
+      // 恢复表单
+      submitBtn.disabled = false;
+      submitBtn.textContent = '发送建议';
+      form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
+    }
+  });
+
+  function showStatus(message, type) {
+    statusMsg.textContent = message;
+    statusMsg.className = `status-message ${type}`;
+  }
+</script>

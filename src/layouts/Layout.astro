@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import SuggestionForm from "../components/SuggestionForm.astro";
+import SuggestionFab from "../components/SuggestionFab.astro";
 
 interface Props {
   title: string;
@@ -39,5 +41,11 @@ const { title, description = "Free anxiety-relief techniques + premium phone wal
   </head>
   <body class="bg-sage-50 text-sage-900 font-sans antialiased min-h-screen">
     <slot />
+    
+    <!-- Floating Suggestion Button -->
+    <SuggestionFab />
+    
+    <!-- Suggestion Form Modal -->
+    <SuggestionForm />
   </body>
 </html>
