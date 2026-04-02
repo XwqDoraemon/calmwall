@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import SuggestionForm from "../components/SuggestionForm.astro";
 import { techniques, categoryMeta } from "../data/techniques";
 import TechniqueCard from "../components/TechniqueCard.astro";
 
@@ -137,33 +136,4 @@ const categories = Object.entries(categoryMeta);
   </section>
 
   <Footer />
-  
-  <!-- Suggestion Form Modal -->
-  <SuggestionForm />
 </Layout>
-
-<script>
-  document.querySelectorAll('.category-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const category = tab.getAttribute('data-category');
-      document.querySelectorAll('.category-tab').forEach(t => {
-        t.classList.remove('bg-sage-800', 'border-sage-800', 'text-white', 'shadow-md');
-        t.classList.add('bg-white', 'border-sage-200', 'text-sage-600');
-      });
-      tab.classList.remove('bg-white', 'border-sage-200', 'text-sage-600');
-      tab.classList.add('bg-sage-800', 'border-sage-800', 'text-white', 'shadow-md');
-      const cards = document.querySelectorAll('.technique-card');
-      let visibleCount = 0;
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-card-category') === category) {
-          card.style.display = '';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-      const emptyState = document.getElementById('empty-state');
-      if (emptyState) emptyState.classList.toggle('hidden', visibleCount > 0);
-    });
-  });
-</script>
